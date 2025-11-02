@@ -23,6 +23,7 @@ useeio.js
 wiki
 
 # Configuration files
+config
 config/settings.js
 config/keys.json
 config/.env
