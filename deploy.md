@@ -5,15 +5,19 @@ Append "nopr" or "No PR" if you are not yet ready to send a Pull Request.
 
 ## Using git.sh (Recommended)
 
-Run your git.sh commands from a separate terminal. (Otherwise Code CLIs tend to use their own "push" interpretations.)
+Claude Code CLI can write your PR comments if you run the "push" command below.
+
+Or run your git.sh commands as follows in a separate terminal from your CLI.
 
 Start a secure virtual session in your local webroot and give the git.sh files permission.  
-You can run ./git.sh from the root of your webroot.  (It resides in the team submodule to share among sites.)
+
 
 	python3 -m venv env
 	source env/bin/activate
 	chmod +x git.sh
 	chmod +x team/git.sh
+
+Run ./git.sh in your webroot.  In the root git.sh is a pass-through to the team/git.sh file.
 
 You can watch your webroot's file status change in Github Desktop to confirm updates are deployed.
 
