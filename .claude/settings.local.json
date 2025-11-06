@@ -27,7 +27,9 @@
       "Bash(git checkout:*)",
       "Bash(awk:*)",
       "Bash(cat:*)",
-      "Bash(node:*)"
+      "Bash(node:*)",
+      "Bash(source:*)",
+      "Bash(conda activate:*)"
     ],
     "deny": [
       "Read(../**)"
