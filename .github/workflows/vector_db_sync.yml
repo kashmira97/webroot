@@ -28,10 +28,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          # Try repo-specific requirements
-          pip install -r codechat/requirements.txt || true
-          # Core sync deps (serverless Pinecone SDK)
-          pip install --upgrade tiktoken tree_sitter tqdm pyyaml pandas pinecone openai
+          pip install -r codechat/ingestion/requirements.txt
 
       - name: Run VectorDB Sync (commit-range)
         env:
@@ -41,8 +38,8 @@ jobs:
         run: |
           set -euo pipefail
           # Skip if sync script not present (e.g., codechat PR not merged yet)
-          if [ ! -f codechat/vectordb_sync.py ]; then
-            echo "[skip] codechat/vectordb_sync.py not found; skipping VectorDB sync."
+          if [ ! -f codechat/ingestion/vector_db_sync.py ]; then
+            echo "[skip] codechat/ingestion/vector_db_sync.py not found; skipping VectorDB sync."
             exit 0
           fi
 
@@ -62,7 +59,7 @@ jobs:
             BASE="${HEAD}^"
           fi
           echo "[info] Sync range: $BASE..$HEAD"
-          python codechat/vectordb_sync.py --from-commit "$BASE" --to-commit "$HEAD" --repo-root .
+          python codechat/ingestion/vector_db_sync.py --from-commit "$BASE" --to-commit "$HEAD" --repo-root .
 
       - name: Error summary
         if: always()

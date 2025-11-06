@@ -26,6 +26,7 @@
       "Bash(git rm:*)",
       "Bash(git checkout:*)",
       "Bash(awk:*)",
+      "Bash(cat:*)",
       "Bash(node:*)"
     ],
     "deny": [
