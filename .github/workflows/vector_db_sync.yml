@@ -30,36 +30,11 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r codechat/ingestion/requirements.txt
 
-      - name: Run VectorDB Sync (commit-range)
+      - name: Run VectorDB Sync
         env:
           PINECONE_API_KEY: ${{ secrets.PINECONE_API_KEY }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          # Skip if sync script not present (e.g., codechat PR not merged yet)
-          if [ ! -f codechat/ingestion/vector_db_sync.py ]; then
-            echo "[skip] codechat/ingestion/vector_db_sync.py not found; skipping VectorDB sync."
-            exit 0
-          fi
-
-          # Skip if required secrets not provided
-          if [ -z "${PINECONE_API_KEY:-}" ] || [ -z "${OPENAI_API_KEY:-}" ]; then
-            echo "[skip] Missing PINECONE_API_KEY or OPENAI_API_KEY; skipping VectorDB sync."
-            exit 0
-          fi
-          if [ "${{ github.event_name }}" = "push" ]; then
-            BASE="${{ github.event.before }}"; HEAD="${{ github.sha }}"
-          else
-            BASE="${{ github.event.pull_request.base.sha }}"
-            HEAD="${{ github.event.pull_request.merge_commit_sha }}"
-            if [ -z "$HEAD" ]; then HEAD="${{ github.sha }}"; fi
-          fi
-          if [ "$BASE" = "0000000000000000000000000000000000000000" ] || [ -z "$BASE" ]; then
-            BASE="${HEAD}^"
-          fi
-          echo "[info] Sync range: $BASE..$HEAD"
-          python codechat/ingestion/vector_db_sync.py --from-commit "$BASE" --to-commit "$HEAD" --repo-root .
+        run: python codechat/ingestion/vector_db_sync.py --skip-on-missing-keys
 
       - name: Error summary
         if: always()
