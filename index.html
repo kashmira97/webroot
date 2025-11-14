@@ -12,43 +12,33 @@
 <script type="text/javascript" src="team/js/common.js"></script>
 <script type="text/javascript" src="team/js/setup.js"></script>
 
-
 <script>
 // Create OS detection panel using shared function
 autoCreateOSDetectionPanel('#commonSetupDiv');
 
 loadMarkdown("README.md", "readmeDiv", "_parent", 1, function() {
-    // https://partnertools.github.io/webroot/
-    // Process content after README loads into #readmeDiv
-
     let currentPath = window.location.href;
-    let myRepo = "PartnerTools"; // Default
-    
-    // Extract GitHub account from URL if available
-    // Pattern: https://[account].github.io/webroot/ or similar GitHub Pages patterns
+    let myRepo = "PartnerTools";
+
     const githubPagesMatch = currentPath.match(/\/\/([^.]+)\.github\.io/);
     if (githubPagesMatch && githubPagesMatch[1]) {
         myRepo = githubPagesMatch[1];
     } else if (currentPath.includes("localhost") || currentPath.includes("model.earth")) {
         myRepo = "modelearth";
     }
-    
+
     let linkString = "<a href='https://github.com/" + myRepo + "/webroot/' target='github_fork'>github.com/" + myRepo + "/webroot</a>";
-    
-    // Replace "the webroot repo" with linkString in the #textInPage div
+
     setTimeout(() => {
         const textInPage = document.getElementById('textInPage');
         if (textInPage) {
-            // Preserve field values before innerHTML replacement
             const gitAccountField = document.getElementById("gitAccount");
             const myWebrootForkNameField = document.getElementById("myWebrootForkName");
             const gitAccountValue = gitAccountField ? gitAccountField.value : '';
             const myWebrootForkNameValue = myWebrootForkNameField ? myWebrootForkNameField.value : '';
-            
-            // Replace the content
+
             textInPage.innerHTML = textInPage.innerHTML.replace(/the webroot repo/g, linkString);
-            
-            // Restore field values after replacement
+
             const newGitAccountField = document.getElementById("gitAccount");
             const newMyWebrootForkNameField = document.getElementById("myWebrootForkName");
             if (newGitAccountField && gitAccountValue) {
@@ -57,83 +47,60 @@ loadMarkdown("README.md", "readmeDiv", "_parent", 1, function() {
             if (newMyWebrootForkNameField && myWebrootForkNameValue) {
                 newMyWebrootForkNameField.value = myWebrootForkNameValue;
             }
-            
-            // Fields will be initialized when setupGitAccountFields is called later
         }
     }, 100);
-    
-    // Setup webroot setup content and Git account fields after content processing
+
     setTimeout(() => {
         setupWebrootSetup('webrootSetup');
         setupGitAccountFields('textInPage');
         setupTradeFlowRepos('tradeFlowRepos');
         setupGeminiResources('gemini-resources-main');
         setupBackendInfo('backendInfo');
-        // Load deploy.md into deployDiv
         loadMarkdown("deploy.md", "deployDiv", "_parent", 1);
-        // Update fork repos commands after README loads and fields are setup
-        setTimeout(() => {
-            updateForkReposCommands();
-        }, 100);
+        setTimeout(() => { updateForkReposCommands(); }, 100);
     }, 200);
-    
-    // Process webroot path and port adjustments in #readmeDiv after README loads
-    //setTimeout(() => {
-        const readmeDiv = document.getElementById('readmeDiv');
-        if (readmeDiv) {
-            let content = readmeDiv.innerHTML;
-            
-            // Detect current port from window.location
-            const currentPort = window.location.port;
-            const hasExplicitPort = currentPort !== '';
-            const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-            
-            // Detect webroot folder from current path
-            const currentPathname = window.location.pathname;
-            const pathSegments = currentPathname.split('/').filter(segment => segment);
-            
-            // Check if we're in a webroot container (has a parent folder) and on localhost
-            let webrootFolder = '';
-            if (pathSegments.length > 0 && isLocalhost) {
-                // Only use webroot folder for localhost URLs with explicit ports
-                if (hasExplicitPort) {
-                    webrootFolder = pathSegments[0];
-                }
+
+    const readmeDiv = document.getElementById('readmeDiv');
+    if (readmeDiv) {
+        let content = readmeDiv.innerHTML;
+
+        const currentPort = window.location.port;
+        const hasExplicitPort = currentPort !== '';
+        const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+
+        const currentPathname = window.location.pathname;
+        const pathSegments = currentPathname.split('/').filter(segment => segment);
+
+        let webrootFolder = '';
+        if (pathSegments.length > 0 && isLocalhost) {
+            if (hasExplicitPort) {
+                webrootFolder = pathSegments[0];
             }
-            
-            // Replace localhost:8887 with current port if different and port is explicitly in URL
-            if (hasExplicitPort && currentPort !== '8887') {
-                content = content.replace(/localhost:8887/g, `localhost:${currentPort}`);
-                
-                // Add port notice at the top
-                const portNotice = `<div style="background-color: #e7f3ff; border: 1px solid #b3d9ff; padding: 10px; margin-bottom: 15px; border-radius: 5px;"><strong>Your current port ${currentPort} has been used to replace 8887 in the display below.</strong></div>`;
-                content = portNotice + content;
-            }
-            
-            // If we're in a webroot folder on localhost with explicit port, insert it after "localhost:port/"
-            if (webrootFolder) {
-                const portPattern = new RegExp(`localhost:${currentPort || '8887'}/`, 'g');
-                content = content.replace(portPattern, `localhost:${currentPort || '8887'}/${webrootFolder}/`);
-                
-                // Populate the #myWebrootForkName field if webroot folder is detected and different from "webroot"
-                if (webrootFolder !== "webroot") {
-                    setTimeout(() => {
-                        const webrootForkNameField = document.getElementById("myWebrootForkName");
-                        if (webrootForkNameField && !webrootForkNameField.value) {
-                            webrootForkNameField.value = webrootFolder;
-                            updateGitAccountFields(); // Update storage and links
-                        }
-                    }, 100);
-                }
-            }
-            
-            readmeDiv.innerHTML = content;
         }
-    //}, 200);
+
+        if (hasExplicitPort && currentPort !== '8887') {
+            content = content.replace(/localhost:8887/g, `localhost:${currentPort}`);
+            const portNotice = `<div style="background-color:#e7f3ff;border:1px solid #b3d9ff;padding:10px;margin-bottom:15px;border-radius:5px;"><strong>Your current port ${currentPort} has been used to replace 8887 in the display below.</strong></div>`;
+            content = portNotice + content;
+        }
+
+        if (webrootFolder) {
+            const portPattern = new RegExp(`localhost:${currentPort || '8887'}/`, 'g');
+            content = content.replace(portPattern, `localhost:${currentPort || '8887'}/${webrootFolder}/`);
+
+            setTimeout(() => {
+                const webrootForkNameField = document.getElementById("myWebrootForkName");
+                if (webrootForkNameField && !webrootForkNameField.value) {
+                    webrootForkNameField.value = webrootFolder;
+                    updateGitAccountFields();
+                }
+            }, 100);
+        }
+
+        readmeDiv.innerHTML = content;
+    }
 });
-
 </script>
-
 </head>
 
 <body>
@@ -147,6 +114,92 @@ loadMarkdown("README.md", "readmeDiv", "_parent", 1, function() {
     <div id="gemini-resources-main"></div>
     <div class="card" id="backendInfo"></div>
     <div class="card" id="deployDiv"></div>
+
+    <!-- Natural-language search -->
+    <div id="nl-search-wrapper" style="display:none; margin-top:12px;">
+      <label for="nl-search-input" style="display:block;margin-bottom:6px;">Natural language search (Gemini + Claude)</label>
+      <div style="display:flex;gap:8px;">
+        <input id="nl-search-input" type="text" placeholder="Try: 'recent methane reports near California dairy farms'" style="flex:1;padding:8px;" />
+        <button id="nl-search-btn" style="padding:8px 12px;">Search</button>
+      </div>
+      <div id="nl-search-note" style="margin-top:6px;color:#666;font-size:90%;">
+        Sample search: "Find recent methane emission reports for California dairy farms"
+      </div>
+      <pre id="nl-search-results" style="margin-top:10px;white-space:pre-wrap;"></pre>
+    </div>
+
+<script>
+  // show NL search only on localhost (include IPv6) and guard element existence
+  const isLocal = ['localhost','127.0.0.1','::1'].includes(location.hostname);
+  const wrapper = document.getElementById('nl-search-wrapper');
+  if (isLocal && wrapper) {
+    wrapper.style.display = '';
+
+    (function loadSharedInsights(){
+      // Load required shared scripts (if not already present) and wire the NL search
+      function loadScript(src, cb){
+        var s = document.createElement('script'); s.src = src;
+        s.onload = cb; s.onerror = function(){ console.warn('Could not load script', src); cb(); };
+        document.head.appendChild(s);
+      }
+
+      var queue = [];
+      if (typeof window.apiCall !== 'function') queue.push('/team/js/common.js');
+      // projects.js contains AI helpers (queryGeminiAI etc.) used by the team pages
+      if (typeof window.setupGeminiIntegration !== 'function' && typeof window.queryGeminiAI !== 'function') queue.push('/team/js/projects.js');
+
+      function runQueue(){
+        if (queue.length === 0) return initNL();
+        var src = queue.shift();
+        loadScript(src, runQueue);
+      }
+
+      function initNL(){
+        try { window.ENABLE_CLAUDE_HAIKU_4_5 = true; } catch(e){}
+
+        var btn = document.getElementById('nl-search-btn');
+        var input = document.getElementById('nl-search-input');
+        var out = document.getElementById('nl-search-results');
+
+        function renderResponse(resp){
+          if (!out) return;
+          out.textContent = typeof resp === 'string' ? resp : JSON.stringify(resp, null, 2);
+        }
+
+        function doRunQuery(q){
+          if (!out) return;
+          out.textContent = 'Running query...';
+
+          // Preferred: use apiCall to backend endpoint that proxies Gemini/Claude
+          if (typeof window.apiCall === 'function'){
+            window.apiCall('/ai/query', 'POST', { prompt: q }).then(function(resp){
+              renderResponse(resp);
+            }).catch(function(err){ renderResponse('Error: ' + (err && err.message ? err.message : String(err))); });
+            return;
+          }
+
+          // Fallbacks to any globally exposed run function
+          var run = window.runNLQuery || window.runInsightsQuery || window.runQuery || window.queryGeminiAI;
+          if (typeof run === 'function'){
+            Promise.resolve(run(q)).then(renderResponse).catch(function(err){ renderResponse('Error: ' + (err && err.message ? err.message : String(err))); });
+            return;
+          }
+
+          renderResponse('No NL API available (start Rust API server to enable /ai/query).');
+        }
+
+        if (btn && input){
+          btn.addEventListener('click', function(){ doRunQuery(input.value); });
+          input.addEventListener('keyup', function(e){ if (e.key === 'Enter') doRunQuery(input.value); });
+        } else if (input){
+          input.addEventListener('keyup', function(e){ if (e.key === 'Enter') doRunQuery(input.value); });
+        }
+      }
+
+      runQueue();
+    })();
+  }
+</script>
 </div>
 </body>
 </html>
