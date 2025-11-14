@@ -25,6 +25,9 @@
 [submodule "comparison"]
 	path = comparison
 	url = https://github.com/modelearth/comparison
+[submodule "grid"]
+	path = grid
+	url = https://github.com/modelearth/grid
 [submodule "realitystream"]
 	path = realitystream
 	url = https://github.com/modelearth/realitystream
