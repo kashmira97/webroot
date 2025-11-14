@@ -18,7 +18,7 @@
 	url = https://github.com/modelearth/cloud
 [submodule "codechat"]
 	path = codechat
-	url = https://github.com/modelearth/codechat
+	url = https://github.com/ananthpai1998/codechat
 [submodule "codechat-vectors"]
 	path = codechat-vectors
 	url = https://github.com/modelearth/codechat-vectors
