@@ -1,0 +1,71 @@
+services:
+  web:
+    image: python:3.11-slim
+    container_name: webroot-web
+    working_dir: /app
+    volumes:
+      - .:/app
+    ports:
+      - "8887:8887"
+    command: python -m http.server 8887
+    networks:
+      - webroot-network
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:15-alpine
+    container_name: webroot-postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_DEFAULT_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_DEFAULT_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DEFAULT_DB}
+      # Multiple databases will be created via init script
+      POSTGRES_MULTIPLE_DATABASES: membercommons,exiobase,suitecrm
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./docker/postgres/init-multiple-databases.sh:/docker-entrypoint-initdb.d/init-multiple-databases.sh
+      - ./team/admin/sql:/docker-entrypoint-initdb.d/sql
+    networks:
+      - webroot-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_DEFAULT_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build:
+      context: ./team
+      dockerfile: Dockerfile
+    container_name: webroot-api
+    working_dir: /app/team
+    volumes:
+      - ./team:/app/team
+      - cargo-cache:/usr/local/cargo/registry
+      - cargo-git:/usr/local/cargo/git
+      - target-cache:/app/team/target
+    ports:
+      - "8081:8081"
+    environment:
+      - RUST_LOG=info
+      - PORT=8081
+    env_file:
+      - ./team/.env
+    depends_on:
+      - postgres
+    networks:
+      - webroot-network
+    restart: unless-stopped
+
+networks:
+  webroot-network:
+    driver: bridge
+
+volumes:
+  postgres-data:
+  cargo-cache:
+  cargo-git:
+  target-cache:
