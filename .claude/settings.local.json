@@ -27,6 +27,9 @@
       "Bash(git checkout:*)",
       "Bash(awk:*)",
       "Bash(node:*)",
+      "Bash(lsof:*)",
+      "Bash(xargs kill:*)",
+      "Bash(cat:*)",
       "WebSearch"
     ],
     "deny": [
