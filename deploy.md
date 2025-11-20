@@ -59,9 +59,13 @@ To recover previously committed work that was overwritten locally:
 ## Using Github Desktop
 
 You can also use Github Desktop to choose a repo in the webroot using "File > Add Local Repository". 
-Then submit a PR through the Github.com website. (The "push" with Claude or git.sh will send a PR automatically.)
+Then submit a PR through the Github.com website.  
+Or "./git.sh push" without Claude to send a PR automatically, but there won't be detailed Claude comments.
+Or prompt "push" with Claude to have a description of your changes in Claude included.  
+(Sometimes Claude gets confused and treats the team folder as the webroot.)
 
-IMPORTANT: If you're using Github Desktop to push, you'll probably still need to send a PR in Github.com.
+
+IMPORTANT: If you're using Github Desktop to push, you'll still need to send the PR from within Github.com.
 
 
 ## Using Claude Code CLI with git.sh (so so)
