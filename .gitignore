@@ -36,8 +36,8 @@ settings.local.json
 *.pem
 env/*
 .env
-.env.local
-.env.production
+.env.*
+!.env.example
 *.env
 
 # Logs
