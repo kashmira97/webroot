@@ -54,7 +54,7 @@ loadMarkdown("README.md", "readmeDiv", "_parent", 1, function() {
         setupWebrootSetup('webrootSetup');
         setupGitAccountFields('textInPage');
         setupTradeFlowRepos('tradeFlowRepos');
-        setupGeminiResources('gemini-resources-main');
+        setupGeminiResources();
         setupBackendInfo('backendInfo');
         loadMarkdown("deploy.md", "deployDiv", "_parent", 1);
         setTimeout(() => { updateForkReposCommands(); }, 100);
