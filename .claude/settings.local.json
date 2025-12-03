@@ -2,6 +2,7 @@
   "permissions": {
     "allow": [
       "Bash(python:*)",
+      "Bash(python3:*)",
       "Bash(grep:*)",
       "Bash(find:*)",
       "Bash(rg:*)",
