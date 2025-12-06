@@ -31,7 +31,9 @@
       "Bash(lsof:*)",
       "Bash(xargs kill:*)",
       "Bash(cat:*)",
-      "WebSearch"
+      "WebSearch",
+      "Bash(cargo check:*)",
+      "Bash(cargo build:*)"
     ],
     "deny": [
       "Read(../**)"
