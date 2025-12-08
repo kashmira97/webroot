@@ -28,24 +28,24 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r codechat/ingestion/requirements.txt
+          pip install -r chat/ingestion/requirements.txt
 
       - name: Run VectorDB Sync
         env:
           PINECONE_API_KEY: ${{ secrets.PINECONE_API_KEY }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        run: python codechat/ingestion/vector_db_sync.py --skip-on-missing-keys
+        run: python chat/ingestion/vector_db_sync.py --skip-on-missing-keys
 
       - name: Error summary
         if: always()
         shell: bash
         run: |
-          if [ -f codechat/.vector_sync_errors.jsonl ]; then
+          if [ -f chat/.vector_sync_errors.jsonl ]; then
             {
               echo "## Vector Sync Errors";
               echo;
               echo '```jsonl';
-              tail -n 200 codechat/.vector_sync_errors.jsonl;
+              tail -n 200 chat/.vector_sync_errors.jsonl;
               echo '```';
             } >> "$GITHUB_STEP_SUMMARY"
           else
@@ -57,6 +57,6 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: vector-sync-errors
-          path: codechat/.vector_sync_errors.jsonl
+          path: chat/.vector_sync_errors.jsonl
           if-no-files-found: ignore
           retention-days: 7
