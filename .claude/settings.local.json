@@ -34,7 +34,11 @@
       "WebSearch",
       "Bash(cargo check:*)",
       "Bash(cargo build:*)",
-      "Bash(claude:*)"
+      "Bash(claude:*)",
+      "Bash(npm update:*)",
+      "Bash(npm audit:*)",
+      "Bash(npm install:*)",
+      "Bash(npm run build:*)"
     ],
     "deny": [
       "Read(../**)"
