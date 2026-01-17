@@ -22,9 +22,9 @@
 [submodule "chat"]
 	path = chat
 	url = https://github.com/modelearth/chat
-[submodule "codechat-vectors"]
-	path = codechat-vectors
-	url = https://github.com/modelearth/codechat-vectors
+[submodule "codechat"]
+	path = codechat
+	url = https://github.com/modelearth/codechat
 [submodule "comparison"]
 	path = comparison
 	url = https://github.com/modelearth/comparison
