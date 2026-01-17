@@ -28,6 +28,9 @@
 [submodule "comparison"]
 	path = comparison
 	url = https://github.com/modelearth/comparison
+[submodule "desktop"]
+	path = desktop
+	url = https://github.com/ModelEarth/desktop.git
 [submodule "grid"]
 	path = grid
 	url = https://github.com/modelearth/grid
