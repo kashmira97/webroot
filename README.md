@@ -1,10 +1,12 @@
 <h1 class="card-title">HTTP Web Server Front-end</h1>
 
-Run the following in your local "webroot" folder using Claude to start an http server on port 8887:
+Run the following in your local "webroot" folder using Claude Code CLI to start an http server on port 8887:
 
 	start server
 
-Or run without Claude.:
+The "start server" command runs ./desktop/install/quickstart.sh which creates a virtual environment in desktop/install/env/ if it doesn't exist, and starts the Python HTTP server with server-side execution access.
+
+Or run a basic http server without server-side execution:
 
 	python -m http.server 8887
 
