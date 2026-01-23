@@ -40,7 +40,14 @@
       "Bash(npm install:*)",
       "Bash(npm run build:*)",
       "WebFetch(domain:raw.githubusercontent.com)",
-      "WebFetch(domain:www.ars.usda.gov)"
+      "WebFetch(domain:www.ars.usda.gov)",
+      "Bash(for dir in cv/*/)",
+      "Bash(do [ -f \"$dir/index.html\" ])",
+      "Bash(done)",
+      "Bash(while read dir)",
+      "Bash(do [ -d \"cv/$dir\" ]:*)",
+      "Bash([ -f \"cv/$dir/detailed.json\" ])",
+      "Bash([ -d \"cv/$dir\" ])"
     ],
     "deny": [
       "Read(../**)"
