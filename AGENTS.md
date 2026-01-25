@@ -1,31 +1,33 @@
 # AGENTS.md
 
-The AGENTS.md is the equivalent to CLAUDE.md
+This is the equivalent to `CLAUDE.md`.
 
-Use modern clean designs inspired by claude.ai
+Use modern, clean designs inspired by claude.ai.
 
-Guidelines for primary agents reside in:
+Primary guidance files:
+- `/localsite/AGENTS.md`
+- `/team/AGENTS.md`
 
-/localsite/AGENTS.md
-/team/CLAUDE.md
+Submodule overview:
+- `codechat/README.md`
 
+Key standards (from linked AGENTS files):
+- HTML: use `/localsite/start/template/index.html` for new pages; include `<meta charset="UTF-8">` except in redirects or template fragments.
+- DOM waits: never use `setTimeout` for DOM; use `waitForElm(selector)` from `localsite/js/localsite.js` (confirm it is included first).
+- Hash state: prefer `getHash`, `goHash`, `updateHash`, and `hashChangeEvent` from `localsite/js/localsite.js`.
+- Paths: never hardcode user-specific paths; use relative paths or repo-root discovery.
+- Git: only run push/pull via `./git.sh` and only commit/push when the user explicitly asks.
 
-Typical start commands:
+Start commands:
+- `start server` — starts Python HTTP server without Flask (`desktop/install/quickstart.sh`)
+- `start rust` — Rust API server (from `team` repo)
+- `start flask` — starts both `cloud` and `pipeline`
+- `start cloud` — Flask for `cloud/run` (RealityStream), local + deploy to Google Cloud
+- `start pipeline` — Flask for `data-pipeline/admin`
+- `start html` — bare bones without Python (not needed if you ran `start server`)
 
-**start server** - starts python without Flask (uses desktop/install/quickstart.sh)
-**start rust** - resides in team repo
-
-Additional start commands:
-
-**start flask** - starts both of the following
-**start cloud** - For cloud/run for RealityStream. You can integrate our deployment to Google Cloud.
-**start pipeline** - starts for data-pipeline/admin
-
-**start html** - bare bones without python (not needed if you ran start server)
-
-Ports
-
-Port 8887: Python HTTP server (desktop/install/quickstart.sh)                                                
-Port 8081: Rust API server (from team repo)
-Port 5001: Data-Pipeline Flask server                                                        
-Port 8100: Cloud/run Flask server
+Ports:
+- `8887` — Python HTTP server (`desktop/install/quickstart.sh`)
+- `8081` — Rust API server (from `team` repo)
+- `5001` — Data-Pipeline Flask server
+- `8100` — Cloud/run Flask server
