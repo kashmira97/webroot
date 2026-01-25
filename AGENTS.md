@@ -18,6 +18,10 @@ Key standards (from linked AGENTS files):
 - Paths: never hardcode user-specific paths; use relative paths or repo-root discovery.
 - Git: only run push/pull via `./git.sh` and only commit/push when the user explicitly asks.
 
+Claude Code sessions:
+- Session history: `~/.claude/history.jsonl` (JSONL format with sessionId, timestamp, display, project)
+- Use Python or `jq` to parse efficiently; avoid multiple `awk` attempts on macOS
+
 Start commands:
 - `start server` — starts Python HTTP server without Flask (`desktop/install/quickstart.sh`)
 - `start rust` — Rust API server (from `team` repo)
