@@ -91,6 +91,7 @@ apps
 community
 community-data
 community-timelines
+community-zipcodes
 contributors
 coreutilities
 cv
@@ -119,3 +120,4 @@ useeio
 useeio-json
 useeio.js
 wiki
+zip
