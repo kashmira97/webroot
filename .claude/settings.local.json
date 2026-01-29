@@ -47,7 +47,8 @@
       "Bash(while read dir)",
       "Bash(do [ -d \"cv/$dir\" ]:*)",
       "Bash([ -f \"cv/$dir/detailed.json\" ])",
-      "Bash([ -d \"cv/$dir\" ])"
+      "Bash([ -d \"cv/$dir\" ])",
+      "Bash(git config:*)"
     ],
     "deny": [
       "Read(../**)"

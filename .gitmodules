@@ -43,9 +43,6 @@
 [submodule "products"]
 	path = products
 	url = https://github.com/modelearth/products
-[submodule "products-data"]
-	path = products-data
-	url = https://github.com/modelearth/products-data
 [submodule "projects"]
 	path = projects
 	url = https://github.com/modelearth/projects
@@ -67,3 +64,6 @@
 [submodule "community-forecasting"]
 	path = community-forecasting
 	url = https://github.com/modelearth/community-forecasting
+[submodule "better-auth"]
+	path = better-auth
+	url = https://github.com/modelearth/better-auth
