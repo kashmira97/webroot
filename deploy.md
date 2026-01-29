@@ -5,7 +5,7 @@ Append "nopr" or "No PR" if you are not yet ready to send a Pull Request.
 
 ## Using git.sh (Recommended)
 
-Claude Code CLI can write your PR comments if you run the "push" command below.
+Your Code CLI can write your PR comments if you run the "push" command below.
 
 Or run your git.sh commands as follows in a separate terminal from your CLI.
 
@@ -60,25 +60,23 @@ To recover previously committed work that was overwritten locally:
 
 You can also use Github Desktop to choose a repo in the webroot using "File > Add Local Repository". 
 Then submit a PR through the Github.com website.  
-Or "./git.sh push" without Claude to send a PR automatically, but there won't be detailed Claude comments.
-Or prompt "push" with Claude to have a description of your changes in Claude included.  
-(Sometimes Claude gets confused and treats the team folder as the webroot.)
+Or "./git.sh push" to send a PR automatically, but there won't be detailed comments from your CLI coding.
+Or prompt "push" with your CLI to have a description of your changes included.  
+Note: Sometimes CLIs gets confused and treat the team folder as the webroot.
 
 
 IMPORTANT: If you're using Github Desktop to push, you'll still need to send the PR from within Github.com.
 
 
-## Using Claude Code CLI with git.sh (so so)
+## Using your CLI with ./git.sh push
 
-We don't use Claude with git.sh frequently because Claude doesn't always find the webroot smoothly, and sometimes starts following its own Github steps - which can require numerous approvals.
+For the first usage, include extra guidance. Your push will also pull recent updates from others on Github.
 
-For the first usage, include extra guidance:
-
-	push using claude.md with git.sh  
+	push using webroot/AGENTS.md with git.sh  
 
 
-If you find "push" is asking for multiple approvals, Claude isn't following its CLAUDE.md instructions.
-When CLAUDE.md is followed, "push" uses the git.sh file to first pull, then update the webroot, submodules and forks.
+If you find "push" is asking for multiple approvals, your CLI isn't following its AGENTS.md instructions.
+When AGENTS.md is followed, "push" uses the git.sh file to first pull, then update the webroot, submodules and forks.
 
 	push
 
