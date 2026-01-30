@@ -17,6 +17,10 @@ Key standards (from linked AGENTS files):
 - Hash state: prefer `getHash`, `goHash`, `updateHash`, and `hashChangeEvent` from `localsite/js/localsite.js`.
 - Paths: never hardcode user-specific paths; use relative paths or repo-root discovery.
 - Git: only run push/pull via `./git.sh` and only commit/push when the user explicitly asks.
+- **Push scope**: when user says "push [repo]", push ONLY that specific repository. Do not use `git add .` or stage unrelated changes. Examples:
+  - "push localsite" → push only localsite submodule changes
+  - "push team" → push only team submodule changes
+  - "push" or "push all" → push webroot + all submodules via `./git.sh push`
 
 Claude Code sessions:
 - Session history: `~/.claude/history.jsonl` (JSONL format with sessionId, timestamp, display, project)
