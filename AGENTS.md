@@ -15,7 +15,7 @@ Key standards (from linked AGENTS files):
 - HTML: use `/localsite/start/template/index.html` for new pages; include `<meta charset="UTF-8">` except in redirects or template fragments.
 - DOM waits: never use `setTimeout` for DOM; use `waitForElm(selector)` from `localsite/js/localsite.js` (confirm it is included first).
 - Hash state: prefer `getHash`, `goHash`, `updateHash`, and `hashChangeEvent` from `localsite/js/localsite.js`.
-- Paths: never hardcode user-specific paths; use relative paths or repo-root discovery.
+- Paths: never hardcode user-specific paths; use relative paths or repo-root discovery. "Users" and the current user's name or computer name are never included.
 - Git: only run push/pull via `./git.sh` and only commit/push when the user explicitly asks.
 - **Push scope**: when user says "push [repo]", push ONLY that specific repository. Do not use `git add .` or stage unrelated changes. Examples:
   - "push localsite" → push only localsite submodule changes

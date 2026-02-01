@@ -48,7 +48,8 @@
       "Bash(do [ -d \"cv/$dir\" ]:*)",
       "Bash([ -f \"cv/$dir/detailed.json\" ])",
       "Bash([ -d \"cv/$dir\" ])",
-      "Bash(git config:*)"
+      "Bash(git config:*)",
+      "WebFetch(domain:en.wikipedia.org)"
     ],
     "deny": [
       "Read(../**)"
