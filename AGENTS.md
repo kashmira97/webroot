@@ -27,7 +27,7 @@ Claude Code sessions:
 - Use Python or `jq` to parse efficiently; avoid multiple `awk` attempts on macOS
 
 Start commands:
-- `start server` — starts Python HTTP server without Flask (`desktop/install/quickstart.sh`)
+- `start server` — starts Python HTTP server and Python backend (not Flask) (`desktop/install/quickstart.sh`)
 - `start rust` — Rust API server (from `team` repo)
 - `start flask` — starts both `cloud` and `pipeline`
 - `start cloud` — Flask for `cloud/run` (RealityStream), local + deploy to Google Cloud
