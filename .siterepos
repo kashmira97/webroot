@@ -4,9 +4,9 @@
 [siterepo "cv"]
 	path = cv
 	url = https://github.com/modelearth/cv
-[siterepo "trade-data"]
-	path = trade-data
-	url = https://github.com/modelearth/trade-data
 [siterepo "nisar"]
 	path = nisar
 	url = https://github.com/modelearth/nisar
+[siterepo "trade-data"]
+	path = trade-data
+	url = https://github.com/modelearth/trade-data
