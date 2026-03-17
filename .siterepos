@@ -1,18 +1,9 @@
-[siterepo "airports"]
-	path = airports
-	url = https://github.com/modelearth/airports
 [siterepo "community"]
 	path = community
 	url = https://github.com/modelearth/community
 [siterepo "cv"]
 	path = cv
 	url = https://github.com/modelearth/cv
-[siterepo "engage"]
-	path = engage
-	url = https://github.com/modelearth/engage
-[siterepo "grid"]
-	path = grid
-	url = https://github.com/modelearth/grid
 [siterepo "nisar"]
 	path = nisar
 	url = https://github.com/modelearth/nisar
