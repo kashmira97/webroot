@@ -51,7 +51,12 @@
       "Bash(git config:*)",
       "WebFetch(domain:en.wikipedia.org)",
       "WebFetch(domain:docs.rs)",
-      "Bash(source:*)"
+      "Bash(source:*)",
+      "WebFetch(domain:localhost)",
+      "Bash(python3 -c \"import json,sys; [print\\(f[''''name'''']\\) for f in json.load\\(sys.stdin\\) if isinstance\\(json.load\\(open\\(''''/dev/stdin'''',''''r''''\\)\\) if False else f, dict\\) and ''''name'''' in f]\")",
+      "Bash(/Users/Loren/env/bin/pip install:*)",
+      "Bash(~/env/bin/python3 bea/main.py)",
+      "Bash(git:*)"
     ],
     "deny": [
       "Read(../**)"
