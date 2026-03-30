@@ -34,7 +34,8 @@ jobs:
         env:
           PINECONE_API_KEY: ${{ secrets.PINECONE_API_KEY }}
           VOYAGE_API_KEY: ${{ secrets.VOYAGE_API_KEY }}
-        run: python chat/ingestion/vector_db_sync.py --skip-on-missing-keys
+        # community-forecasting contains heavy assets that we do not want to index in this webroot workflow.
+        run: python chat/ingestion/vector_db_sync.py --skip-on-missing-keys --skip-paths community-forecasting
 
       - name: Error summary
         if: always()
