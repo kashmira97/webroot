@@ -1,6 +1,6 @@
-[siterepo "abundance"]
-	path = abundance
-	url = https://github.com/modelearth/abundance
+[siterepo "project"]
+	path = project
+	url = https://github.com/modelearth/project
 [siterepo "community"]
 	path = community
 	url = https://github.com/modelearth/community
