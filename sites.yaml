@@ -1,16 +1,6 @@
-- value: tools
-  label: PartnerTools
-
 - value: model.earth
   label: Model Earth
   selected: true
-
-- value: planet.live
-  label: Planet Live
-  class: local
-
-- value: dreamstudio
-  label: DreamStudio
 
 - value: model.africa
   label: Model Africa
@@ -38,7 +28,3 @@
 
 - value: neighborhood.org
   label: Neighborhood
-
-- value: democracylab
-  label: DemocracyLab
-  class: local
