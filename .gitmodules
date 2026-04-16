@@ -49,6 +49,9 @@
 [submodule "localsite"]
 	path = localsite
 	url = https://github.com/ModelEarth/localsite
+[submodule "montage"]
+	path = montage
+	url = https://github.com/ModelEarth/montage.git
 [submodule "products"]
 	path = products
 	url = https://github.com/modelearth/products
